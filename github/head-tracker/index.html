@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+
+		var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		var oscillator = audioCtx.createOscillator();
+		var gainNode = audioCtx.createGain();
+		
+		oscillator.connect(gainNode);
+		gainNode.connect(audioCtx.destination);
+		
+		oscillator.type = 'square'; // sine wave — other values are 'square', 		'sawtooth', 'triangle' and 'custom'
+		oscillator.frequency.value = 5; // value in hertz
+		oscillator.start();
+
+		function changeFreq(str, num) {
+			if (str === "plus") {
+				oscillator.frequency.value += num;
+			}
+			else if (str === "minus") {
+				oscillator.frequency.value -= num;
+			}
+		}
+	</script>
+	<script src="js/headtrackr.js">
+
+	</script>
+</script>
+
+</head>
+<body>
+
+<button id = 'minus'> - </button>
+<button id = 'plus'> + </button>
+<button id = 'stop'> STOP </button>
+
+<script type="text/javascript">
+	var minusB = document.getElementById('minus');
+	var plusB = document.getElementById('plus');
+	var stopB = document.getElementById('stop');
+
+	minusB.addEventListener('click', function() {
+		changeFreq('minus', 10);
+	})
+
+	plusB.addEventListener('click', function() {
+		changeFreq('plus', 10);
+	})
+
+	stopB.addEventListener('click', function() {
+		oscillator.frequency.value = 0;
+	})
+</script>
+
+<div>
+<canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
+<video id="inputVideo" autoplay loop></video>
+</div>
+<script type="text/javascript">
+  var videoInput = document.getElementById('inputVideo');
+  var canvasInput = document.getElementById('inputCanvas');
+
+  var htracker = new headtrackr.Tracker();
+  htracker.init(videoInput, canvasInput);
+  htracker.start();
+
+var startX = 100;
+
+
+
+  document.addEventListener("facetrackingEvent", function( event ) {
+                // clear canvas
+                //overlayContext.clearRect(0,0,320,240);
+                // once we have stable tracking, draw rectangle
+
+                if (event.detection == "CS") {
+                	if(startX < event.x) {
+                		changeFreq('minus', 10);
+                	}
+                	else if (startX > event.x ) {
+                		changeFreq('plus', 10);
+                	}
+                    startX = event.x;
+
+                    // overlayContext.translate(event.x, event.y)
+                    // overlayContext.rotate(event.angle-(Math.PI/2));
+                    // overlayContext.strokeStyle = "#00CC00 ";
+                    // overlayContext.strokeRect((-(event.width/2)) >> 0, (-(event.height/2)) >> 0, event.width, event.height);
+                    // overlayContext.rotate((Math.PI/2)-event.angle);
+                    // overlayContext.translate(-event.x, -event.y);
+                }
+            });
+
+
+</script>
+
+</body>
+</html>
