@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>head-tracker.js</title>
+        <meta charset="utf-8">
+        <style>
+        
+        </style>
+    </head>
+<body>
+    <canvas id="inputCanvas" width="320" height="240" style="display:none"></canvas>
+    <video id="inputVideo" autoplay loop></video>
+    <script type="text/javascript">
+      var videoInput = document.getElementById('inputVideo');
+      var canvasInput = document.getElementById('inputCanvas');
+
+      var htracker = new headtrackr.Tracker();
+      htracker.init(videoInput, canvasInput);
+      htracker.start();
+    </script>
+
+<!-- Script links go here -->
+    <script type="text/javascript">
+    function Animal(){
+    }
+        Animal.prototype.createContext = function(H,W,CanvasRenderingContext2D){
+            console.log(Animal);
+        };
+        
+    </script>
+    <script src="headtrackr.js"></script>
+    <script src="headtrackr.min.js"></script>
+    <script src="Gruntfile.js"></script>
+    <script src="src/camshift.js"></script>
+    <script src="src/cascade.js"></script>
+    <script src="src/ccv.js"></script>
+    <script src="src/controllers.js"></script>
+    <script src="src/facetrackr.js"></script>
+    <script src="src/headposition.js"></script>
+    <script src="src/main.js"></script>
+    <script src="src/smoother.js"></script>
+    <script src="src/ui.js"></script>
+    <script src="src/whitebalance.js"></script>
+</body>
+</html>
