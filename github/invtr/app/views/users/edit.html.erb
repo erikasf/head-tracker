@@ -1,0 +1,6 @@
+<div class="margin-top row">
+  <div class="medium-12 columns">
+  	<h1> User Edit View </h1>
+  </div>
+</div>
+<%= render 'form', user: @user, url: @user.id.present? ? user_path(@user.id) : user_path %>

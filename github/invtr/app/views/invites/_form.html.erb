@@ -1,0 +1,208 @@
+<%= simple_form_for invite, url: url do |f| %>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :name, label: "", placeholder: "Event name" %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :start_date, as: :datetime, ampm: true, label: "" %>
+   </div>
+   <div class="medium-12 columns">
+     <%= f.input :end_date, as: :datetime, ampm: true, label: "" %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :description, label: "", placeholder: "Tell them the details", label: "", as: :text %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :address, html: { id: "pac-input" }, label: "" %>
+   </div>
+ </div>
+
+
+ <div class="row">
+   <div class="large-12 columns">
+
+     <div id="myModal2" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+     <table id="myModal2-table">
+
+       <tbody id="myModal2-table-body">
+
+       </tbody>
+     </table>
+     </div>
+
+   </div>
+ </div>   
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :avatar, as: :file %>
+   </div>
+ </div>
+
+ <div class="row">
+   <div class="large-12 columns">
+     <%= f.button :submit %>
+   </div>
+ </div>
+ <div class="row">
+   <div class="large-12 columns">
+     By clicking "Submit" you are agreeing to our <a href="/terms-of-service">terms of service</a> and our <a href="/privacy-policy">privacy policy</a>.
+   </div>
+ </div>
+
+ <script>
+    $("#send-emails-button").click(function() {
+      var emailsString = $("#emails").val();
+      var emails = emailsString.replace(/,/g, '');
+      document.cookie = "invited=" + emails;
+      document.cookie = "oauth_provider=none"
+      document.cookie = "ownerEmail=" + $("#my-email").val();
+      $('#myModal').foundation('reveal', 'close');
+    });
+ </script>
+
+ <script>
+
+ </script>
+
+ <script>
+ document.cookie = "oauth_provider=hotmail";
+
+ $("#myModal2").click(function() {
+   document.cookie = "oauth_provider=google";
+   });
+ $("#hotmailLogin").click(function() {
+   document.cookie = "oauth_provider=hotmail";
+   addCookie("invite_name", $("#invite_name").val())
+   addCookie("invite_address", $("#invite_address").val())
+   addCookie("invite_description", $("#invite_description").val())
+
+   addCookie("invite_start_date_1i", $("#invite_start_date_1i").val())
+   addCookie("invite_start_date_2i", $("#invite_start_date_2i").val())
+   addCookie("invite_start_date_3i", $("#invite_start_date_3i").val())
+   addCookie("invite_start_date_4i", $("#invite_start_date_4i").val())
+   addCookie("invite_start_date_5i", $("#invite_start_date_5i").val())
+
+   addCookie("invite_end_date_1i", $("#invite_end_date_1i").val())
+   addCookie("invite_end_date_2i", $("#invite_end_date_2i").val())
+   addCookie("invite_end_date_3i", $("#invite_end_date_3i").val())
+   addCookie("invite_end_date_4i", $("#invite_end_date_4i").val())
+   addCookie("invite_end_date_5i", $("#invite_end_date_5i").val())
+ });
+
+ function addCookie(cname, value) {
+  document.cookie= cname + "=" + value;
+
+ }
+ </script>
+<script>
+function delete_cookie( name ) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+$("#new_invite").submit(function() {
+  delete_cookie("invite_name");
+  delete_cookie("invite_address");
+  delete_cookie("invite_description");
+
+  delete_cookie("invite_start_date_1i");
+  delete_cookie("invite_start_date_2i");
+  delete_cookie("invite_start_date_3i");
+  delete_cookie("invite_start_date_4i");
+  delete_cookie("invite_start_date_5i");
+
+  delete_cookie("invite_end_date_1i");
+  delete_cookie("invite_end_date_2i");
+  delete_cookie("invite_end_date_3i");
+  delete_cookie("invite_end_date_4i");
+  delete_cookie("invite_end_date_5i");
+});
+
+</script>
+ <script>
+ $("#invite_name").val(getCookie("invite_name"));
+ $("#invite_address").val(getCookie("invite_address"));
+ $("#invite_description").val(getCookie("invite_description"));
+ console.log("ewr");
+ console.log(getCookie("invite_start_date_1i") == "");
+ if(getCookie("invite_start_date_1i") != "") {
+  $("#invite_start_date_1i").val(getCookie("invite_start_date_1i"));
+ }
+
+ if(getCookie("invite_start_date_2i") != "") {
+  $("#invite_start_date_2i").val(getCookie("invite_start_date_2i"));
+ }
+ if(getCookie("invite_start_date_3i") != "") {
+  $("#invite_start_date_3i").val(getCookie("invite_start_date_3i"));
+ }
+ if(getCookie("invite_start_date_4i") != "") {
+  $("#invite_start_date_4i").val(getCookie("invite_start_date_4i"));
+ }
+ if(getCookie("invite_start_date_5i") != "") {
+  $("#invite_start_date_5i").val(getCookie("invite_start_date_5i"));
+ }
+
+ if(getCookie("invite_end_date_1i") != "") {
+  $("#invite_start_end_1i").val(getCookie("invite_start_end_1i"));
+ }
+ if(getCookie("invite_end_date_2i") != "") {
+  $("#invite_start_end_2i").val(getCookie("invite_start_end_2i"));
+ }
+
+ if(getCookie("invite_end_date_3i") != "") {
+  $("#invite_start_end_3i").val(getCookie("invite_start_end_3i"));
+ }
+
+ if(getCookie("invite_end_date_4i") != "") {
+  $("#invite_start_end_4i").val(getCookie("invite_start_end_4i"));
+ }
+
+ if(getCookie("invite_end_date_5i") != "") {
+  $("#invite_start_end_5i").val(getCookie("invite_start_end_5i"));
+ }
+
+ function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+} 
+ </script>
+
+<script>
+
+</script>
+<% end %>
+
+<a href="#" class="button" id="choose-contacts-button" data-reveal-id="myModal">Choose Contacts</a>
+<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <p>Choose your service provider (easiest)</p>
+      <a href="<%= @login_url %>" id="hotmailLogin"><%= image_tag("hotmail", size: "120x120") %></a>
+
+      <a onclick="auth();" data-reveal-id="myModal2"><%= image_tag("gmail", size: "120x120") %>
+</a>
+
+
+  <br><br>
+  Or type each one in individually<br> 
+  <div class="center"><input type="textarea" name="emails" id="emails"></div>
+  What email should I send your notification to?<br>
+   <div class="center"><input type="text" name="myEmail" id="my-email"></div>
+  <a class='button' id='send-emails-button'>Finish</a>
+  <p>We believe in privacy. We won't spam your contacts.</p>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>

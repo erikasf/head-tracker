@@ -1,0 +1,27 @@
+<div class="margin-top row">
+  <div class="medium-12 columns">
+  	<p> Accepted <%= @email %> for <%= @invite.name %></p>
+  	<%= render 'details', invite: @invite %>
+  	<span class="addtocalendar atc-style-blue">
+  	    <var class="atc_event">
+  	        <var class="atc_date_start"><%= @invite.start_date %></var>
+  	        <var class="atc_date_end"><%= @invite.end_date %></var>
+  	        <var class="atc_timezone"><%= @invite.timezone %></var>
+  	        <var class="atc_title"><%= @invite.name %></var>
+  	        <var class="atc_description"><%= @invite.description %></var>
+  	        <var class="atc_location"><%= @invite.address %></var>
+  	    </var>
+  	</span>
+  </div>
+</div>
+
+<script type="text/javascript">(function () {
+        if (window.addtocalendar)if(typeof window.addtocalendar.start == "function")return;
+        if (window.ifaddtocalendar == undefined) { window.ifaddtocalendar = 1;
+            var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+            s.type = 'text/javascript';s.charset = 'UTF-8';s.async = true;
+            s.src = ('https:' == window.location.protocol ? 'https' : 'http')+'://addtocalendar.com/atc/1.5/atc.min.js';
+            var h = d[g]('body')[0];h.appendChild(s); }})();
+
+</script>
+

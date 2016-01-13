@@ -1,0 +1,19 @@
+<% if @sorted_reports.count > 0 %>
+  <h2>Most reported invites</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Number of reports</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @sorted_reports.each do |invite| %>
+  	  <tr>
+  	    <td><a href="/invites/<%= invite.id %>">View</a></td>
+  	    <td><%= invite.report_count %></td>
+  	  </tr>
+  	<% end %>
+    </tbody>
+  </table>
+<% end %>

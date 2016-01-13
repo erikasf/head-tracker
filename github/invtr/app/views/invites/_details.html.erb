@@ -1,0 +1,7 @@
+<%= image_tag invite.avatar, class: "invite-image" %>
+<h1> Event Name: <%= invite.name %> </h1>
+<p> Starting: <%= invite.start_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+<p> Ending: <%= invite.end_date.strftime("%m/%d/%y %I:%M %p") %> </p>
+<p> Address: <%= invite.address %> </p>
+<p> Details: <%= invite.description %> </p>
+<p> Allow others: <%= invite.allow_others %> </p>

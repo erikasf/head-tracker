@@ -1,0 +1,53 @@
+<%= simple_form_for invite, url: url do |f| %>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :name %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-2 columns">
+     <%= f.input :start_date, as: :datetime, ampm: true %>
+   </div>
+   <div class="medium-2 columns">
+     <%= f.input :end_date, as: :datetime, ampm: true %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :description %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :address, html: { id: "pac-input" } %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :allow_others, as: :boolean %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :avatar, as: :file %>
+   </div>
+ </div>
+
+ <div class="row">
+   <div class="large-12 columns">
+     <%= f.button :submit %>
+   </div>
+ </div>
+ <div class="row">
+   <div class="large-12 columns">
+     By clicking "Submit" you are agreeing to our <a href="/terms-of-service">terms of service</a> and our <a href="/privacy-policy">privacy policy</a>.
+   </div>
+ </div>
+
+<% end %>
+

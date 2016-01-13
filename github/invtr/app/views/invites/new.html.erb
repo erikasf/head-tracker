@@ -1,0 +1,227 @@
+<!-- NEW INVITE VIEW -->
+
+
+<style>
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+</style>
+
+
+    <script>
+function initMap() {
+
+  var input = /** @type {!HTMLInputElement} */(
+      document.getElementById('invite_address'));
+
+  var types = document.getElementById('type-selector');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+ 
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    alert(place);
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"
+        async defer></script>
+        <script src="https://apis.google.com/js/client.js"></script>
+<script>
+document.cookie = "ownerEmail=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
+document.cookie = "invited=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';";
+
+String.prototype.toProperCase = function(){
+    return this.toLowerCase().replace(/(^[a-z]| [a-z]|-[a-z])/g, 
+         function($1){
+            return $1.toUpperCase();
+        }
+    );
+};
+function auth() {
+  var config = {
+    'client_id': '832245431959-4qt4jj9euf22pd3d6tdsqknrdd32nuem.apps.googleusercontent.com',
+    'scope': 'https://www.google.com/m8/feeds'
+  };
+  gapi.auth.authorize(config, function() {
+    var token = gapi.auth.getToken();
+    // console.log(token)
+    token['g-oauth-window'] = null;
+    fetchGoogleContacts(token);
+  });
+}
+function fetchGoogleContacts(token) {
+  $.ajax({
+    url: 'https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=1000',
+    dataType: 'jsonp',
+    data: token
+  }).done(function(data) {
+    var arr = new Array();
+    var nameArr = new Array();
+    var nameObj = {};
+
+    var d = data["feed"]["entry"];
+    $.each(d, function(i, obj) {
+
+      try {
+        var email = obj["gd$email"][0]["address"].toLowerCase();
+        var name = obj["title"]["$t"];
+        var img = obj["link"][0]["href"];
+        arr.push(email);
+        if (name != "") {
+          nameArr.push(name.toProperCase());
+          if (email == "titus@visionlink.org") {
+            console.log(obj);
+          }
+          nameObj[name] = email;
+          nameObj[email] = img;
+        }
+        
+      } catch(err) {
+
+      }
+    });
+    arr.sort();
+    nameArr.sort()
+    var count = 0;
+    for (var i in arr) {
+      count++
+      if (count > -1) {
+        // console.log();
+
+        // if name !== undefined
+        if (typeof name != 'undefined' && typeof nameObj[nameArr[i]] != 'undefined') {
+
+          var imageUrl = nameObj[nameObj[nameArr[i]]];
+          var src = imageUrl + "?access_token=" + token["access_token"]
+
+          // console.log(token);
+          var uri = '/assets/blank-avatar.gif';
+          // $("#myModal2").append("<img onerror='if (this.src !=\"" + uri + "\") this.src = \"" + uri + "\"' id='" + i + "' alt='' src='" + src + "' height='50px' width='50px'>");
+          var elem = "#" + i
+          // $(elem).error(function() {
+          //   $("#myModal").append('<%= image_tag("blank-avatar", size: "50x50", alt: "blank-avatar.gif") %>')
+          // })
+// first tr
+// nothihng, name
+// second tr, checkbox, email
+          $("#myModal2-table-body").append("<tr>");
+
+          $("#myModal2-table-body").append("<td>");
+
+          $("#myModal2-table-body").append("<input class='emailCheckbox' type=checkbox name='" + nameObj[nameArr[i]] + "'' id='" + nameObj[nameArr[i]] + "'/><label for='" + nameObj[nameArr[i]] + "'></label>");
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<td>");
+
+          $("#myModal2-table-body").append("  <b>" + nameArr[i] + "<b>  ");
+          $("#myModal2-table-body").append("<br/>");
+
+          $("#myModal2-table-body").append(nameObj[nameArr[i]]);
+        
+          $("#myModal2-table-body").append("</td>");
+          $("#myModal2-table-body").append("<tr>");
+
+        }
+      }
+
+
+ 
+    }
+    $("#myModal2").append("<a class='button' id='continue-button'>Continue</a>");
+
+    // console.log(data)
+    document.cookie = "ownerEmail=" + data["feed"]["id"]["$t"];
+    // console.log(document.cookie)
+
+    
+  });
+}
+
+var invited = [];
+
+$('body').delegate('#continue-button', 'click', function() {
+    $('a.close-reveal-modal').trigger('click');
+    var invitedString = invited.toString().replace(",", " ");
+    var newCookie = 'invited=' + invitedString + ';'
+    // console.log(newCookie);
+    document.cookie = newCookie;
+});
+
+$('body').delegate('.emailCheckbox', 'click', function() {
+    // add to cookie
+    if (invited.indexOf(this.name) == -1) {
+      invited.push(this.name)
+    }
+    // console.log(invited);
+});
+
+$.get( "https://outlook.office.com/api/v2.0/me/contacts", {"app_id": "29651c10-8c55-475d-b23b-e3c79c4cdef0", "scope": "https://outlook.office.com/Contacts.Read"}, function( data ) {
+  console.log("get");
+  console.log(data);
+});
+
+</script>
+
+<script>
+$('#myModal').foundation('reveal','open');
+console.log("hh");
+</script> 
+
+<%= render 'form', invite: @invite, url: invites_path %>
+
+<% if @contacts %>
+<script>
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+}
+
+if (getURLParameter("show_modal") != null) {
+  console.log(getURLParameter("show_modal"))
+
+console.log("here");
+  <% @contacts.each do |contact| %>
+  $("#myModal").append("<input class='emailCheckbox' type=checkbox name='" + '<%=contact["EmailAddresses"][0]["Name"] %>' + "'>");
+    $("#myModal").append('<%=contact["EmailAddresses"][0]["Name"] %>  ');
+
+    $("#myModal").append('<%= contact["EmailAddresses"][0]["Address"] %>');
+    
+    $("#myModal").append("<br>");
+
+  <% end %>
+  console.log("2");
+  $('#myModal').foundation('reveal','open');
+  $("#myModal").append("<a class='button' id='continue-button'>Continue</a>");
+}
+  </script> 
+<% end %>

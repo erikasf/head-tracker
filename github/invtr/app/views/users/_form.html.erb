@@ -1,0 +1,52 @@
+<%= simple_form_for user, url: url do |f| %>
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :email %>
+   </div>
+ </div>
+
+ <div class="margin-top row">
+   <div class="medium-12 columns">
+     <%= f.input :name %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :city %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :state_or_region %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :country, as: :text %>
+   </div>
+ </div>
+
+ <% if @user.id.present? %>
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :password, as: :password %>
+   </div>
+ </div>
+
+  <div class="row">
+   <div class="medium-12 columns">
+     <%= f.input :password_confirmation, as: :password %>
+   </div>
+ </div>
+ <% end %>
+
+
+ <div class="row">
+   <div class="large-12 columns">
+     <%= f.button :submit %>
+   </div>
+ </div>
+<% end %>

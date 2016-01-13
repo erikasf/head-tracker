@@ -1,0 +1,145 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+
+body {
+    z-index:5;
+    background-image: url('/assets/IMAGE_SP.jpg');
+    background-color:white;
+    width:100%;
+    height:100px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+form {
+	padding-top: 4%;
+	padding-bottom: 1%;
+	border-radius: 10px;
+	margin-top: 2%;
+	max-width: 500px;
+    min-width: 450px;
+	background: #f2f2f2;
+}
+
+.invite_details {
+   margin-left: -15%;
+   padding-top: 1%;
+   padding-bottom: 1%;
+   border-radius: 10px;
+   margin-top: 4%;
+   width: 40%;
+   background: #f2f2f2; 
+}
+
+.medium-12.columns select {
+    display: inline-block;
+    width: 17%;
+    font-size: 12px;
+  }
+
+.reveal-modal {
+    overflow-y: auto;
+    max-height: 600px;
+    border-radius: 10px;
+}
+
+
+.invite-image {
+    max-height: 200px;
+}
+
+.button {
+    border-radius: 25px !important;
+}
+#choose-contacts-button {
+    margin-left: 25%;
+}
+
+#myModal2, .center {
+    text-align: center;
+}
+
+#myModal2-table {
+    border: none !important;
+}
+input[type=checkbox] {
+display:none;
+}
+ 
+input[type=checkbox] + label
+{
+background: #999;
+height: 16px;
+width: 16px;
+display:inline-block;
+padding: 0 0 0 0px;
+border-radius:100%;
+moz-border-radius:100% 
+}
+input[type=checkbox]:checked + label
+{
+background: #0080FF;
+height: 16px;
+width: 16px;
+display:inline-block;
+padding: 0 0 0 0px;
+border-radius:100%;
+moz-border-radius:100% 
+}
+
+
+#emails {
+    height: 120px;
+    width: 96%;
+    border-radius:10px;
+    moz-border-radius:10px;
+    border: solid;
+}
+
+#invite_description {
+    height: 120px !important;
+    width: 96%;
+    border-radius:10px;
+    moz-border-radius:10px;
+}
+
+#invite_address, #invite_name{
+   width: 96%;
+   border-radius:10px;
+   moz-border-radius:10px; 
+}
+
+
+#my-email {
+    border-radius:10px;
+    moz-border-radius:10px;
+    width: 25%;
+    margin-left: 2%;
+}
+
+select {
+   border-radius:10px;
+   moz-border-radius:10px; 
+}
+
+abbr {
+    display: none;
+}
+
+label.file_optional {
+    display: none;
+}
